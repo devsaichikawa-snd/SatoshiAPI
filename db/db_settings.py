@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.engine.base import Engine
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker, Session
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,6 +23,7 @@ DB_URL = f"{DIALECT}+{DRIVER}://{DB_USER_NAME}:{DB_PASSWORD}@{HOST}:{PORT}/{DATA
 
 
 db_engine = create_engine(DB_URL, echo=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=db_engine)
 
 
 def get_db_engine() -> Engine:
@@ -35,6 +36,15 @@ def dispose_db_engine(engine: Engine) -> None:
     return engine.dispose()
 
 
-def get_db_session() -> Session:
-    """データベースセッションを取得"""
+def get_db():
+    """リクエストが来たらセッションを作成し、処理が完了したら閉じるためのDependency."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def get_session():
+    """data_inport用"""
     return Session(db_engine)

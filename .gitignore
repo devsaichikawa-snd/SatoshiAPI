@@ -163,3 +163,5 @@ cython_debug/
 
 
 snd_bt_list.xlsx
+public_gym_list.xlsx
+chromedriver.exe

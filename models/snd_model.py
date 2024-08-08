@@ -1,7 +1,5 @@
 from datetime import datetime
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.types import String, Integer, DateTime
 
 
@@ -17,12 +15,12 @@ class SndBroadcast(Base):
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, autoincrement=True
     )
+    # 放送日YYYYmmdd
+    broadcast_date: Mapped[str] = mapped_column(String(8), unique=True)
     # 放送年yyyy
     broadcast_year: Mapped[str] = mapped_column(String(4), nullable=True)
     # 放送月mm
     broadcast_month: Mapped[str] = mapped_column(String(2), nullable=True)
-    # 放送日YYYYmmdd
-    broadcast_date: Mapped[str] = mapped_column(String(8), nullable=True)
     # 放送内容
     broadcast_content: Mapped[str] = mapped_column(String(400), nullable=True)
     # アシスタント1

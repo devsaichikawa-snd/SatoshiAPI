@@ -7,9 +7,9 @@ class SndBroadcastRequest(BaseModel):
     validationとserialize/deserializeを担当する
     """
 
+    broadcast_date: str  # 放送日YYYYmmdd
     broadcast_year: str | None = None  # 放送年yyyy
     broadcast_month: str | None = None  # 放送月mm
-    broadcast_date: str | None = None  # 放送日YYYYmmdd
     broadcast_content: str | None = None  # 放送内容
     assistant_1: str | None = None  # アシスタント1
     assistant_2: str | None = None  # アシスタント2
@@ -24,9 +24,9 @@ class SndBroadcastResponse(BaseModel):
     """
 
     id: int
+    broadcast_date: str  # 放送日YYYYmmdd
     broadcast_year: str | None  # 放送年yyyy
     broadcast_month: str | None  # 放送月mm
-    broadcast_date: str | None  # 放送日YYYYmmdd
     broadcast_content: str | None  # 放送内容
     assistant_1: str | None  # アシスタント1
     assistant_2: str | None  # アシスタント2

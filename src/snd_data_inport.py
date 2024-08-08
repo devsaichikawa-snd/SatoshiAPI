@@ -1,4 +1,4 @@
-from db.db_settings import get_db_engine, get_db_session, dispose_db_engine
+from db.db_settings import get_db_engine, get_session, dispose_db_engine
 from common.excel import (
     read_workbook,
     save_and_close_book,
@@ -21,7 +21,7 @@ def import_data():
 
     # DB接続
     engine = get_db_engine()
-    session = get_db_session()
+    session = get_session()
     print("DBに接続しました。")
 
     # snd_bt_list.xlsxからデータを取得する

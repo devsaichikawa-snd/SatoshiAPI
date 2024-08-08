@@ -1,44 +1,30 @@
-import json
 from fastapi import FastAPI
 
-from db.db_settings import get_db_session
-from db.crud import get_select_all, get_select
-from models.snd_model import SndBroadcast
-from schemas.snd_schema import SndBroadcastRequest, SndBroadcastResponse
-from views.snd_data_inport import import_data
+from urls.snd_url import router
+from src.gym_webscraping import web_scraping
+from src.gym_data_cleansing import data_cleansing
 
 
 app = FastAPI()
-db = get_db_session()
+app.include_router(router)
 
 
-@app.get("/")
-def root():
-    url_dict = {
-        "snd_select_all": "/snd_select_all/",
-        "snd_select": "/snd_select/",
-    }
-    return url_dict
+def __inport_data_controller():
+    """SNDの集計ファイルを取り込む"""
+    from src.snd_data_inport import import_data
+
+    import_data()
 
 
-@app.get("/snd_select_all/", response_model=SndBroadcastResponse)
-def snd_select_all():
-    result = get_select_all(db, SndBroadcast)
-    return result
-
-
-@app.get("/snd_select/", response_model=SndBroadcastResponse)
-def snd_select(param_where: SndBroadcastRequest, param_orderby, param_limit):
-    if param_where:
-        where: SndBroadcastRequest = json.loads(param_where)
-    if param_orderby:
-        orderby = json.loads(param_orderby)
-    if param_limit:
-        limit = param_limit
-    result = get_select(db, SndBroadcast, where, orderby, limit)
-    return result
+def __inport_sym_controller():
+    """公共体育館のデータ収集および集計ファイルの取り込み"""
+    gym_list = web_scraping()
+    if gym_list:
+        print(gym_list)
+    # data_cleansing(gym_list)
 
 
 if __name__ == "__main__":
-    print("Hello")
-    # import_data()
+    print("Hello SATOSHI!")
+    # __inport_data_controller()
+    __inport_sym_controller()
