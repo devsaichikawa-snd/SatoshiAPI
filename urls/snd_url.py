@@ -1,7 +1,7 @@
 import json
 from fastapi import APIRouter
 
-from db.crud import get_select_all, get_select
+from db.snd_crud import get_select_all, get_select
 from db.db_settings import get_db
 from models.snd_model import SndBroadcast
 from schemas.snd_schema import SndBroadcastRequest, SndBroadcastResponse

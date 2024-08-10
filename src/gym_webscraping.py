@@ -3,15 +3,18 @@ from common.beautifulsoup4 import (
     create_parser,
     get_elements_by_classes,
 )
+from config.logger import log_decorator
 from common.const import SPOLAND_URL
 
 
+@log_decorator
 def web_scraping():
     """スポランドのサイトにアクセスしてジムの情報を取得する"""
     global_list = []
 
     for page in range(1, 59):
         # 1~58p全てでスクレイピングする
+        aaaaa
         url = f"{SPOLAND_URL}{page}"
         response = get_html(url)
         if response.status_code == 200:
@@ -45,5 +48,6 @@ def web_scraping():
             ]
 
             global_list.append(target_list)
+        break
 
     return global_list
