@@ -17,7 +17,7 @@ class PublicGym(Base):
         Integer, primary_key=True, autoincrement=True
     )
     # 施設名称
-    facility_name = mapped_column(String(100), unique=True)
+    facility_name = mapped_column(String(100))
     # 都道府県
     prefecture = mapped_column(String(20))
     # 自治体(区市町村)
@@ -31,10 +31,10 @@ class PublicGym(Base):
     # トレーニングルームの有無
     training_room_flag: Mapped[bool] = mapped_column(Boolean, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.now, nullable=False
+        DateTime, default=datetime.now
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.now, nullable=False
+        DateTime, default=datetime.now
     )
 
     def to_dict(self):

@@ -15,6 +15,13 @@
             ],
             "jinja": true,
             "justMyCode": true
-        }
+        },
+        {
+            "name": "debug satoshiAPI main",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}\\main.py",
+            "console": "integratedTerminal",
+        },
     ]
 }

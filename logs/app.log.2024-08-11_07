@@ -1,0 +1,18 @@
+INFO 2024-08-11 07:25:10 logger.py logger �����J�n: web_scraping
+ERROR 2024-08-11 07:25:10 logger.py logger �G���[�����Fweb_scraping: name 'aaaaa' is not defined
+Traceback (most recent call last):
+  File "C:\Users\daiko\workspace\SatoshiAPI\config\logger.py", line 19, in wrapper
+    response = func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\daiko\workspace\SatoshiAPI\src\gym_webscraping.py", line 17, in web_scraping
+    aaaaa
+NameError: name 'aaaaa' is not defined
+INFO 2024-08-11 07:25:46 logger.py logger START: web_scraping
+ERROR 2024-08-11 07:25:46 logger.py logger �G���[�����Fweb_scraping: name 'aaaaa' is not defined
+Traceback (most recent call last):
+  File "C:\Users\daiko\workspace\SatoshiAPI\config\logger.py", line 19, in wrapper
+    response = func(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\daiko\workspace\SatoshiAPI\src\gym_webscraping.py", line 17, in web_scraping
+    aaaaa
+NameError: name 'aaaaa' is not defined

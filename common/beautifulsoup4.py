@@ -25,3 +25,11 @@ def get_element_by_class(soup: BeautifulSoup, class_attr: str):
 def get_elements_by_classes(soup: BeautifulSoup, class_attr: str):
     """指定した「class」属性の要素を全て取得する"""
     return soup.find_all(class_=class_attr)
+
+
+def get_element_by_a(element, get_link_flag=False):
+    """指定した要素から「a」属性の要素を抽出する"""
+    a_tag = element.find("a")
+    if a_tag and get_link_flag:
+        return a_tag.get("href")
+    return a_tag

@@ -29,34 +29,6 @@ def get_today() -> date:
     return date.today()
 
 
-def get_last_month(today: date, pattern: str) -> str:
-    """前月日付を取得する
-    Args:
-        today(date): date.today()
-        pattern(str): "yyyymm"や"mm"などの年月日の形式
-    """
-    year = today.year
-    month = today.month
-    # 前月の計算
-    if month == 1:
-        # 1月の場合は前年の12月になる
-        year -= 1
-        month = 12
-    else:
-        month -= 1
-
-    if pattern == "yyyymm":
-        previous_date = f"{year}{month:02}"
-    elif pattern == "mm":
-        previous_date = f"{month:02}"
-    elif pattern == "m月":
-        previous_date = f"{month}月"
-    else:
-        raise ValueError("引数を確認してください。")
-
-    return previous_date
-
-
 def from_str_to_date(value: str) -> date:
     """日付の型変換(str → date)"""
     datetyep_value = date.fromisoformat(value)
@@ -76,7 +48,7 @@ def remove_day_str(value) -> str:
     return value
 
 
-def remove_value(cls, value, start, end):
+def remove_value(value, start, end):
     """指定した範囲の文字列を削除する
 
     Parameters:
@@ -132,7 +104,7 @@ def address_to_address(value):
     変更後：「東京都千代田区北の丸公園２－３」
     ※本処理は完璧でない。ファイルを確認し、修正されていないデータを手動で修正する
     """
-    pattern = r"所在地： 〒\d{3}-\d{4}\s"
+    pattern = r"所在地：〒\d{3}-\d{4}"
     result = re.sub(pattern, "", value)
 
     return result
@@ -148,5 +120,12 @@ def get_prefecture_and_municipality_from_address(value):
     周南)市|(?:余市|高市|[^市]{2,3}?)郡(?:玉村|大町|.{1,5}?)[町村]|(?:.{1,4}市)?[^町]{1,4}?区|.{1,7}?[市町村])(.+)"""
 
     result = re.match(pattern, value)
+
+    return result
+
+
+def trim_breaks_tags(text: str):
+    pattern = r"[\n\t\xa0]"
+    result = re.sub(pattern, "", text)
 
     return result
