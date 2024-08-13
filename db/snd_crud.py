@@ -1,7 +1,10 @@
 import json
 from sqlalchemy import select, column
 
+from config.logger import log_decorator
 
+
+@log_decorator
 def get_select_all(db, table, as_json=False):
     """1テーブルから全検索する"""
     # クエリ文字列を生成する→ SELECT * FROM <table>;
@@ -21,6 +24,7 @@ def get_select_all(db, table, as_json=False):
     return snd_dict
 
 
+@log_decorator
 def get_select(db, table, where={}, orderby={}, limit=0, as_json=False):
     """1テーブルから特定レコードを検索する
 

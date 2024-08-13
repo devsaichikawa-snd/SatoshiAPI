@@ -17,17 +17,17 @@ class PublicGym(Base):
         Integer, primary_key=True, autoincrement=True
     )
     # 施設名称
-    facility_name = mapped_column(String(100))
+    facility_name: Mapped[str] = mapped_column(String(100))
     # 都道府県
-    prefecture = mapped_column(String(20))
+    prefecture: Mapped[str] = mapped_column(String(20))
     # 自治体(区市町村)
-    municipality = mapped_column(String(20))
+    municipality: Mapped[str] = mapped_column(String(20))
     # 所在地
-    address = mapped_column(String(255))
+    address: Mapped[str] = mapped_column(String(255))
     # 電話番号
-    telephone = mapped_column(String(30), nullable=True)
+    telephone: Mapped[str] = mapped_column(String(30), nullable=True)
     # HP-URL
-    url = mapped_column(String(255), nullable=True)
+    url: Mapped[str] = mapped_column(String(255), nullable=True)
     # トレーニングルームの有無
     training_room_flag: Mapped[bool] = mapped_column(Boolean, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
